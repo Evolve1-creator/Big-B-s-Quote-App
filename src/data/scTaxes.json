@@ -1,0 +1,25 @@
+{
+  "stateRate": 0.06,
+  "cities": {
+    "Columbia": {
+      "countyRate": 0.01,
+      "cityRate": 0.01
+    },
+    "Lexington": {
+      "countyRate": 0.01,
+      "cityRate": 0.01
+    },
+    "Charleston": {
+      "countyRate": 0.01,
+      "cityRate": 0.01
+    },
+    "Greenville": {
+      "countyRate": 0.01,
+      "cityRate": 0.0
+    },
+    "Other / No City": {
+      "countyRate": 0.01,
+      "cityRate": 0.0
+    }
+  }
+}
