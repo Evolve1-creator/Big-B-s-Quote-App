@@ -147,28 +147,28 @@
     "name": "Hawaiian Rolls",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 1.0
+    "pricePerPerson": 0.5
   },
   {
     "id": "dinner_rolls",
     "name": "Dinner Rolls",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 1.0
+    "pricePerPerson": 0.5
   },
   {
     "id": "slider_buns",
     "name": "Slider Buns",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 1.0
+    "pricePerPerson": 0.5
   },
   {
     "id": "hamburger_buns",
     "name": "Hamburger Buns",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 1.0
+    "pricePerPerson": 0.5
   },
   {
     "id": "banana_pudding",

@@ -87,15 +87,20 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="topbar">
-        <div>
-          <div className="brand">Big B’s Catering Quotes</div>
-          <div className="subtle">Enter headcount, check items, and generate a client-ready summary.</div>
-        </div>
-        <button className={clientView ? "toggle toggle-on" : "toggle"} onClick={() => setClientView(v => !v)} type="button">
-          Client View: {clientView ? "ON" : "OFF"}
-        </button>
-      </header>
+      
+<header className="topbar">
+  <div className="brandwrap">
+    <img src="/logo.png" alt="Big B’s BBQ Catering logo" className="logo" />
+    <div>
+      <div className="brand">Big B’s Catering Quotes</div>
+      <div className="subtle">Enter headcount, check items, and generate a client-ready summary.</div>
+    </div>
+  </div>
+  <button className={clientView ? "toggle toggle-on" : "toggle"} onClick={() => setClientView(v => !v)} type="button">
+    Client View: {clientView ? "ON" : "OFF"}
+  </button>
+</header>
+
 
       <div className="card">
         <label>
@@ -165,7 +170,6 @@ export default function App() {
           eventDate={eventDate}
           setEventDate={setEventDate}
           lines={lines}
-          subtotal={subtotal}
           taxTotal={taxes.totalTax}
           totalDue={totalDue}
         />

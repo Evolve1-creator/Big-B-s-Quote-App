@@ -1,6 +1,6 @@
 import { money } from "../utils/money";
 
-export default function ClientSummary({ clientName, setClientName, eventDate, setEventDate, lines, subtotal, taxTotal, totalDue }) {
+export default function ClientSummary({ clientName, setClientName, eventDate, setEventDate, lines, taxTotal, totalDue }) {
   return (
     <div className="card client">
       <h2>Client Summary</h2>
@@ -21,25 +21,35 @@ export default function ClientSummary({ clientName, setClientName, eventDate, se
         {lines.length === 0 ? (
           <div className="subtle">No items selected yet.</div>
         ) : (
-          lines.map(l => (
-            <div key={l.id} className="client-line">
-              <div className="client-left">
-                <div className="client-name">{l.name}</div>
-                <div className="subtle">{l.qtyDisplay}</div>
-              </div>
-              <div className="client-right">{money(l.lineTotal)}</div>
-            </div>
-          ))
+          <ul className="client-list">
+            {lines.map(l => (
+              <li key={l.id}>{l.name}</li>
+            ))}
+          </ul>
         )}
       </div>
 
       <div className="client-totals">
-        <div className="totals-row"><span>Subtotal</span><span>{money(subtotal)}</span></div>
-        <div className="totals-row"><span>Tax</span><span>{money(taxTotal)}</span></div>
-        <div className="totals-row grand"><span>Pay This Amount</span><span>{money(totalDue)}</span></div>
+        {taxTotal > 0 && (
+          <div className="totals-row">
+            <span>Sales Tax</span>
+            <span>{money(taxTotal)}</span>
+          </div>
+        )}
+        <div className="totals-row grand">
+          <span>Total</span>
+          <span>{money(totalDue)}</span>
+        </div>
       </div>
 
+      
       <div className="divider" />
+
+      <div className="contact">
+        <strong>Phone:</strong> 803-600-5386
+      </div>
+
+
 
       <div className="disclaimer">
         <div><strong>For all orders over $800, a 25% non-refundable deposit is required.</strong></div>
