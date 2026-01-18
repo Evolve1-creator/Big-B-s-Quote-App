@@ -1,0 +1,36 @@
+{
+  "stateRate": 0.06,
+  "counties": {
+    "Richland": {
+      "countyRate": 0.01,
+      "cities": {
+        "Columbia": {
+          "hospitalityRate": 0.02
+        },
+        "Eastover": {
+          "hospitalityRate": 0.01
+        },
+        "Unincorporated": {
+          "hospitalityRate": 0.0
+        }
+      }
+    },
+    "Lexington": {
+      "countyRate": 0.01,
+      "cities": {
+        "Lexington": {
+          "hospitalityRate": 0.02
+        },
+        "Cayce": {
+          "hospitalityRate": 0.02
+        },
+        "West Columbia": {
+          "hospitalityRate": 0.02
+        },
+        "Unincorporated": {
+          "hospitalityRate": 0.0
+        }
+      }
+    }
+  }
+}

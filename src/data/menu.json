@@ -2,17 +2,228 @@
   {
     "id": "pulled_pork",
     "name": "Pulled Pork",
-    "fullPanFeeds": 50,
-    "halfPanFeeds": 25,
-    "fullPanPrice": 180,
-    "halfPanPrice": 95
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 11.0
   },
   {
-    "id": "mac_cheese",
+    "id": "pulled_chicken",
+    "name": "Pulled Chicken",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 12.0
+  },
+  {
+    "id": "smoked_beef_brisket",
+    "name": "Smoked Beef Brisket",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 17.0
+  },
+  {
+    "id": "pork_belly",
+    "name": "Pork Belly",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 15.0
+  },
+  {
+    "id": "baby_back_ribs",
+    "name": "Baby Back Ribs",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 13.0
+  },
+  {
+    "id": "smoked_pork_loin",
+    "name": "Smoked Pork Loin",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 12.0
+  },
+  {
+    "id": "smoked_sausage",
+    "name": "Smoked Sausage",
+    "category": "Meats",
+    "pricingType": "per_lb",
+    "pricePerLb": 9.0
+  },
+  {
+    "id": "pulled_pork_sandwich",
+    "name": "Pulled Pork Sandwich",
+    "category": "Sandwiches",
+    "pricingType": "per_each",
+    "priceEach": 6.0,
+    "meatOzPerEach": 6
+  },
+  {
+    "id": "pulled_chicken_sandwich",
+    "name": "Pulled Chicken Sandwich",
+    "category": "Sandwiches",
+    "pricingType": "per_each",
+    "priceEach": 6.0,
+    "meatOzPerEach": 6
+  },
+  {
+    "id": "brisket_sandwich",
+    "name": "Brisket Sandwich",
+    "category": "Sandwiches",
+    "pricingType": "per_each",
+    "priceEach": 10.0,
+    "meatOzPerEach": 6
+  },
+  {
+    "id": "hot_dogs_chili",
+    "name": "Hot Dogs & Chili",
+    "category": "Sandwiches",
+    "pricingType": "per_each",
+    "priceEach": 4.0
+  },
+  {
+    "id": "southern_slaw",
+    "name": "Southern Slaw",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 25.0
+  },
+  {
+    "id": "potato_salad",
+    "name": "Potato Salad",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 30.0
+  },
+  {
+    "id": "bbq_baked_beans",
+    "name": "BBQ Baked Beans",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 35.0
+  },
+  {
+    "id": "green_beans",
+    "name": "Green Beans",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 30.0
+  },
+  {
+    "id": "whole_kernel_corn",
+    "name": "Whole Kernel Corn",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 30.0
+  },
+  {
+    "id": "rice",
+    "name": "Rice",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 25.0
+  },
+  {
+    "id": "side_salad",
+    "name": "Side Salad",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 30.0
+  },
+  {
+    "id": "mac_and_cheese",
     "name": "Mac & Cheese",
-    "fullPanFeeds": 45,
-    "halfPanFeeds": 22,
-    "fullPanPrice": 160,
-    "halfPanPrice": 85
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 40.0
+  },
+  {
+    "id": "hash_and_rice",
+    "name": "Hash & Rice",
+    "category": "Sides",
+    "pricingType": "half_pan",
+    "halfPanPrice": 35.0
+  },
+  {
+    "id": "hawaiian_rolls",
+    "name": "Hawaiian Rolls",
+    "category": "Breads",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "dinner_rolls",
+    "name": "Dinner Rolls",
+    "category": "Breads",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "slider_buns",
+    "name": "Slider Buns",
+    "category": "Breads",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "hamburger_buns",
+    "name": "Hamburger Buns",
+    "category": "Breads",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "banana_pudding",
+    "name": "Big B\u2019s Bangin\u2019 Banana Pudding",
+    "category": "Desserts",
+    "pricingType": "half_pan",
+    "halfPanPrice": 40.0
+  },
+  {
+    "id": "chocolate_oreo_delight",
+    "name": "Chocolate Oreo Delight",
+    "category": "Desserts",
+    "pricingType": "half_pan",
+    "halfPanPrice": 40.0
+  },
+  {
+    "id": "tea",
+    "name": "Tea",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "lemonade",
+    "name": "Lemonade",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "bottled_water",
+    "name": "Bottled Water",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "ice",
+    "name": "Ice",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 1.0
+  },
+  {
+    "id": "onsite_service",
+    "name": "Onsite Service",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 5.0
+  },
+  {
+    "id": "delivery",
+    "name": "Delivery",
+    "category": "Drinks & Extras",
+    "pricingType": "flat",
+    "flatPrice": 25.0
   }
 ]

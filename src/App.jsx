@@ -1,106 +1,179 @@
 import { useEffect, useMemo, useState } from "react";
 import menu from "./data/menu.json";
-import scTaxes from "./data/scTaxes.json";
-import { calculatePans } from "./utils/panCalculator";
-import { priceItem } from "./utils/pricingEngine";
-import { sumFees } from "./utils/feeEngine";
-import MenuSelector from "./components/MenuSelector";
-import FeeInput from "./components/FeeInput";
-import ClientToggle from "./components/ClientToggle";
-import QuoteLine from "./components/QuoteLine";
+import scTaxTable from "./data/scTaxTable.json";
+import ItemChecklist from "./components/ItemChecklist";
+import TaxSelector from "./components/TaxSelector";
+import ClientSummary from "./components/ClientSummary";
+import { money } from "./utils/money";
+import { computeLine, computeTaxes } from "./utils/calcEngine";
 
-const LS_KEY = "catering_quote_v2";
-
-function money(n) {
-  const num = Number(n || 0);
-  return `$${num.toFixed(2)}`;
-}
+const LS_KEY = "bb_catering_quote_v1";
 
 export default function App() {
-  const [guests, setGuests] = useState("");
-  const [itemId, setItemId] = useState(menu[0]?.id ?? "");
-  const [lines, setLines] = useState([]);
-  const [serviceFee, setServiceFee] = useState("");
-  const [deliveryFee, setDeliveryFee] = useState("");
-  const [clientView, setClientView] = useState(false);
+  const [people, setPeople] = useState("");
+  const [selected, setSelected] = useState({});
 
-  // Tax controls
   const [addTax, setAddTax] = useState(false);
-  const [city, setCity] = useState("Columbia");
+  const [county, setCounty] = useState("");
+  const [city, setCity] = useState("");
 
-  const guestsNum = Number(guests);
-  const selectedItem = menu.find(m => m.id === itemId);
+  const [clientView, setClientView] = useState(false);
+  const [clientName, setClientName] = useState("");
+  const [eventDate, setEventDate] = useState("");
 
-  const addItem = () => {
-    if (!guestsNum || !selectedItem) return;
-    const pans = calculatePans(guestsNum, selectedItem.fullPanFeeds, selectedItem.halfPanFeeds);
-    const pricing = priceItem(selectedItem, pans, guestsNum);
-    setLines(prev => [...prev, {
-      id: Date.now(),
-      name: selectedItem.name,
-      full: pans.full,
-      half: pans.half,
-      sell: pricing.sell,
-      perPerson: pricing.perPerson
-    }]);
+  // load saved state
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return;
+      const s = JSON.parse(raw);
+      setPeople(s.people ?? "");
+      setSelected(s.selected ?? {});
+      setAddTax(!!s.addTax);
+      setCounty(s.county ?? "");
+      setCity(s.city ?? "");
+      setClientView(!!s.clientView);
+      setClientName(s.clientName ?? "");
+      setEventDate(s.eventDate ?? "");
+    } catch {}
+  }, []);
+
+  // persist
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify({ people, selected, addTax, county, city, clientView, clientName, eventDate }));
+    } catch {}
+  }, [people, selected, addTax, county, city, clientView, clientName, eventDate]);
+
+  const p = Number(people);
+
+  const selectedItems = useMemo(() => {
+    return menu.filter(it => !!selected[it.id]);
+  }, [selected]);
+
+  const lines = useMemo(() => {
+    // compute in the same order as menu definition
+    return selectedItems.map(it => {
+      const calc = computeLine(it, p);
+      return {
+        id: it.id,
+        name: it.name,
+        category: it.category,
+        pricingType: it.pricingType,
+        qtyDisplay: calc.qtyDisplay,
+        unitPrice: calc.unitPrice,
+        lineTotal: calc.lineTotal
+      };
+    });
+  }, [selectedItems, p]);
+
+  const subtotal = useMemo(() => lines.reduce((t, l) => t + Number(l.lineTotal || 0), 0), [lines]);
+
+  const taxes = useMemo(() => {
+    if (!addTax) return { stateTax: 0, countyTax: 0, hospitalityTax: 0, totalTax: 0 };
+    if (!county || !city) return { stateTax: 0, countyTax: 0, hospitalityTax: 0, totalTax: 0 };
+    return computeTaxes(subtotal, scTaxTable, county, city);
+  }, [addTax, county, city, subtotal]);
+
+  const totalDue = subtotal + taxes.totalTax;
+
+  const toggleItem = (id) => {
+    setSelected(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const foodTotal = lines.reduce((t, l) => t + l.sell, 0);
-  const feesTotal = sumFees([serviceFee, deliveryFee]);
-  const subtotal = foodTotal + feesTotal;
-
-  let stateTax = 0, countyTax = 0, cityTax = 0;
-  if (addTax) {
-    const cityCfg = scTaxes.cities[city];
-    stateTax = subtotal * scTaxes.stateRate;
-    countyTax = subtotal * cityCfg.countyRate;
-    cityTax = subtotal * cityCfg.cityRate;
-  }
-
-  const totalDue = subtotal + stateTax + countyTax + cityTax;
+  const clearAll = () => {
+    setSelected({});
+  };
 
   return (
     <div className="app">
-      <h1>{clientView ? "Estimated Catering Quote" : "Catering Quote Builder"}</h1>
+      <header className="topbar">
+        <div>
+          <div className="brand">Big B’s Catering Quotes</div>
+          <div className="subtle">Enter headcount, check items, and generate a client-ready summary.</div>
+        </div>
+        <button className={clientView ? "toggle toggle-on" : "toggle"} onClick={() => setClientView(v => !v)} type="button">
+          Client View: {clientView ? "ON" : "OFF"}
+        </button>
+      </header>
 
-      <input type="number" placeholder="Number of guests" value={guests} onChange={e => setGuests(e.target.value)} />
-      <MenuSelector menu={menu} value={itemId} onChange={setItemId} />
-      <button onClick={addItem}>Add Item</button>
-
-      {lines.map(l => <QuoteLine key={l.id} line={l} showPerPerson={!clientView} />)}
-
-      <FeeInput label="Service Fee" value={serviceFee} onChange={setServiceFee} />
-      <FeeInput label="Delivery Fee" value={deliveryFee} onChange={setDeliveryFee} />
-
-      <label>
-        <input type="checkbox" checked={addTax} onChange={() => setAddTax(v => !v)} />
-        Add Sales Tax
-      </label>
-
-      {addTax && (
+      <div className="card">
         <label>
-          City
-          <select value={city} onChange={e => setCity(e.target.value)}>
-            {Object.keys(scTaxes.cities).map(c => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
+          Number of people
+          <input
+            type="number"
+            min="0"
+            inputMode="numeric"
+            placeholder="e.g., 85"
+            value={people}
+            onChange={e => setPeople(e.target.value)}
+          />
         </label>
+
+        <div className="row">
+          <button className="btn-secondary" type="button" onClick={clearAll}>Clear selections</button>
+        </div>
+      </div>
+
+      <ItemChecklist items={menu} selectedMap={selected} onToggle={toggleItem} />
+
+      <TaxSelector
+        addTax={addTax}
+        setAddTax={setAddTax}
+        county={county}
+        setCounty={setCounty}
+        city={city}
+        setCity={setCity}
+        taxTable={scTaxTable}
+      />
+
+      {!clientView ? (
+        <div className="card">
+          <h2>Internal Quote</h2>
+          {lines.length === 0 ? (
+            <div className="subtle">Select items to see totals.</div>
+          ) : (
+            <div className="lines">
+              {lines.map(l => (
+                <div key={l.id} className="line">
+                  <div className="line-left">
+                    <div className="line-name">{l.name}</div>
+                    <div className="subtle">{l.qtyDisplay}</div>
+                  </div>
+                  <div className="line-right">{money(l.lineTotal)}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="totals">
+            <div className="totals-row"><span>Subtotal</span><span>{money(subtotal)}</span></div>
+            {addTax && county && city && (
+              <>
+                <div className="totals-row"><span>SC State Tax</span><span>{money(taxes.stateTax)}</span></div>
+                <div className="totals-row"><span>{county} County Tax</span><span>{money(taxes.countyTax)}</span></div>
+                <div className="totals-row"><span>Hospitality Tax ({city})</span><span>{money(taxes.hospitalityTax)}</span></div>
+              </>
+            )}
+            <div className="totals-row grand"><span>Total Due</span><span>{money(totalDue)}</span></div>
+          </div>
+        </div>
+      ) : (
+        <ClientSummary
+          clientName={clientName}
+          setClientName={setClientName}
+          eventDate={eventDate}
+          setEventDate={setEventDate}
+          lines={lines}
+          subtotal={subtotal}
+          taxTotal={taxes.totalTax}
+          totalDue={totalDue}
+        />
       )}
 
-      <ClientToggle enabled={clientView} onToggle={() => setClientView(v => !v)} />
-
-      <div className="totals">
-        <div>Subtotal: {money(subtotal)}</div>
-        {addTax && (
-          <>
-            <div>SC State Tax: {money(stateTax)}</div>
-            <div>County Tax: {money(countyTax)}</div>
-            <div>City Tax: {money(cityTax)}</div>
-          </>
-        )}
-        <strong>Total Due: {money(totalDue)}</strong>
-      </div>
+      <footer className="footer subtle">
+        Deploy on Vercel to open from a link on your phone. Data is editable in <code>src/data/menu.json</code> and <code>src/data/scTaxTable.json</code>.
+      </footer>
     </div>
   );
 }
