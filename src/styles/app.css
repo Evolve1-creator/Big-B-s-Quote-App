@@ -1,23 +1,186 @@
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: #f6f7f9;
+  color: #111;
 }
 
 .app {
-  max-width: 420px;
+  max-width: 520px;
   margin: auto;
   padding: 16px;
 }
 
-input, select, button {
-  width: 100%;
-  padding: 10px;
+.header {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
   margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 22px;
+}
+
+h2 {
+  margin: 0 0 10px 0;
   font-size: 16px;
 }
 
-.line {
-  border: 1px solid #ccc;
-  padding: 10px;
+.subtle {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.center { text-align: center; }
+
+.card {
+  background: #fff;
+  border: 1px solid #e6e7ea;
+  border-radius: 12px;
+  padding: 12px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #d7d9df;
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+}
+
+input:focus, select:focus {
+  border-color: #111;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #e9eaee;
+  color: #111;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 440px) {
+  .row, .grid2 { grid-template-columns: 1fr; }
+}
+
+.toggle {
+  width: auto;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  background: #3c3f46;
+}
+
+.toggle-on {
+  background: #1f7a3a;
+}
+
+.lines { display: grid; gap: 10px; }
+
+.line {
+  border: 1px solid #e6e7ea;
+  border-radius: 12px;
+  padding: 10px;
+  background: #fff;
+}
+
+.line-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.link {
+  width: auto;
+  padding: 6px 8px;
+  font-size: 12px;
+  background: transparent;
+  color: #b00020;
+  border: 1px solid #f0c4ca;
+}
+
+.line-meta {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #333;
+}
+
+.line-price {
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-weight: 800;
+}
+
+.taxbox {
+  border: 1px dashed #d7d9df;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.taxlabel { font-weight: 800; }
+.taxvalue { font-size: 18px; font-weight: 900; margin-top: 2px; }
+
+.totals .totals-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f1f4;
+  font-size: 14px;
+}
+
+.totals .totals-row:last-child { border-bottom: none; }
+
+.strong { font-weight: 900; }
+.grand { font-weight: 900; font-size: 16px; }
+
+.footer {
+  padding: 10px 0 16px 0;
 }
