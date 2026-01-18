@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pulled_pork",
+    "name": "Pulled Pork",
+    "fullPanFeeds": 50,
+    "halfPanFeeds": 25,
+    "fullPanPrice": 180,
+    "halfPanPrice": 95
+  },
+  {
+    "id": "mac_cheese",
+    "name": "Mac & Cheese",
+    "fullPanFeeds": 45,
+    "halfPanFeeds": 22,
+    "fullPanPrice": 160,
+    "halfPanPrice": 85
+  }
+]
