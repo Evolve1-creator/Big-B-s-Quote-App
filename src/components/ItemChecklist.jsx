@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 
 export default function ItemChecklist({ items, selectedMap, onToggle }) {
+  const leftCats = new Set(["Meats", "Sides"]);
+  const rightCats = new Set(["Sandwiches", "Breads", "Desserts", "Drinks & Extras", "Other"]);
+
   const grouped = useMemo(() => {
     const g = {};
     for (const it of items) {
@@ -12,41 +15,56 @@ export default function ItemChecklist({ items, selectedMap, onToggle }) {
     return g;
   }, [items]);
 
-  const catOrder = ["Meats","Sandwiches","Sides","Breads","Desserts","Drinks & Extras","Other"];
+  const left = [];
+  const right = [];
 
-  const orderedCats = Object.keys(grouped).sort((a,b) => {
-    const ia = catOrder.indexOf(a);
-    const ib = catOrder.indexOf(b);
-    const ra = ia === -1 ? 999 : ia;
-    const rb = ib === -1 ? 999 : ib;
-    return ra - rb || a.localeCompare(b);
+  Object.entries(grouped).forEach(([cat, arr]) => {
+    if (leftCats.has(cat)) left.push({ cat, arr });
+    else right.push({ cat, arr });
   });
 
   return (
     <div className="card">
       <h2>Select Items</h2>
-      <p className="subtle">Tap the checkbox next to each item.</p>
+      <p className="subtle">Each item is on its own row. Meats & sides on the left; everything else on the right.</p>
 
-      {orderedCats.map(cat => (
-        <div key={cat} className="category">
-          <div className="category-title">{cat}</div>
-          <div className="checkgrid">
-            {grouped[cat].map(it => {
-              const checked = !!selectedMap[it.id];
-              return (
-                <label key={it.id} className={"checkrow" + (checked ? " checked" : "")}>
+      <div className="two-col">
+        <div className="col">
+          {left.map(({cat, arr}) => (
+            <div key={cat} className="category">
+              <div className="category-title">{cat}</div>
+              {arr.map(it => (
+                <label key={it.id} className={"checkrow" + (selectedMap[it.id] ? " checked" : "")}>
                   <input
                     type="checkbox"
-                    checked={checked}
+                    checked={!!selectedMap[it.id]}
                     onChange={() => onToggle(it.id)}
                   />
                   <span className="checkname">{it.name}</span>
                 </label>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          ))}
         </div>
-      ))}
+
+        <div className="col">
+          {right.map(({cat, arr}) => (
+            <div key={cat} className="category">
+              <div className="category-title">{cat}</div>
+              {arr.map(it => (
+                <label key={it.id} className={"checkrow" + (selectedMap[it.id] ? " checked" : "")}>
+                  <input
+                    type="checkbox"
+                    checked={!!selectedMap[it.id]}
+                    onChange={() => onToggle(it.id)}
+                  />
+                  <span className="checkname">{it.name}</span>
+                </label>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

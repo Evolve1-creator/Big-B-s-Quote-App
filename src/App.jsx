@@ -20,7 +20,7 @@ export default function App() {
   const [clientView, setClientView] = useState(false);
   const [clientName, setClientName] = useState("");
   const [eventDate, setEventDate] = useState("");
-  const [page, setPage] = useState("builder");
+  const [page, setPage] = useState(window.location.hash === "#/receipt" ? "receipt" : "builder");
 
   // load saved state
   useEffect(() => {
@@ -120,9 +120,7 @@ export default function App() {
       <div className="subtle">Enter headcount, check items, and generate a client-ready summary.</div>
     </div>
   </div>
-  <button className="toggle" onClick={() => setPage(page === "builder" ? "receipt" : "builder")} type="button">
-          {page === "builder" ? "Receipt" : "Back"}
-        </button>
+  
 </header>
 
 
@@ -203,6 +201,12 @@ export default function App() {
           </div>
         </div>
       ) : (
+        <div className="card">
+          <button type="button" onClick={() => setPage("receipt")}>
+            View Receipt
+          </button>
+        </div>
+
         <ClientSummary
           clientName={clientName}
           setClientName={setClientName}

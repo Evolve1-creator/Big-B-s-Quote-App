@@ -242,3 +242,45 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libe
 
 /* Buttons row spacing */
 .row button { margin-top: 6px; }
+
+
+/* Two-column checklist layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Receipt logo */
+.receipt-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.receipt-logo img {
+  max-height: 90px;
+  width: auto;
+}

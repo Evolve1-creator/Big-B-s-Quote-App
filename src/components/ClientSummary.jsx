@@ -3,6 +3,7 @@ import { money } from "../utils/money";
 export default function ClientSummary({ clientName, setClientName, eventDate, setEventDate, lines, taxTotal, totalDue }) {
   return (
     <div className="card client">
+      <div className="receipt-logo"><img src="/logo.png" alt="Big B’s BBQ logo" /></div>
       <h2>Client Summary</h2>
 
       <div className="grid2">
