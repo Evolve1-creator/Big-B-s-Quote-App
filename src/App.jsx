@@ -89,6 +89,24 @@ export default function App() {
 
       <ItemChecklist items={menu} selectedMap={selected} onToggle={toggleItem} />
 
+
+      <div className="card">
+        <h2>Selected Items (Internal)</h2>
+        {selectedItems.length === 0 ? (
+          <p className="subtle">No items selected.</p>
+        ) : (
+          <ul className="summary-list">
+            {selectedItems.map(it => (
+              <li key={it.id}>
+                <span>{it.name}</span>
+                {it.price != null && <span>${it.price.toFixed(2)}</span>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+
       <div className="card">
         <button onClick={() => setPage("receipt")}>View Receipt</button>
         <button className="btn-secondary" onClick={resetQuote}>

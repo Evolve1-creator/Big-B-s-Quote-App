@@ -271,3 +271,15 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libe
     grid-template-columns: 1fr;
   }
 }
+
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+}
+.summary-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
