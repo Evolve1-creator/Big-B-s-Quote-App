@@ -219,86 +219,22 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libe
 }
 
 
-/* Receipt Page */
-.receipt-page .receipt {
-  max-width: 860px;
-  margin: 18px auto;
-}
-
-.receipt-head {
+/* Checkbox alignment fix */
+.checkrow {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
 }
 
-.receipt-title {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-}
-
-.receipt-fields {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.rf .label {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.rf .value {
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 2px;
-}
-
-.receipt-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 16px 0;
-}
-
-.section-title {
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.itemlist {
-  list-style: none;
-  padding: 0;
+.checkrow input[type="checkbox"] {
   margin: 0;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
-.itemlist li {
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--border);
+.checkname {
+  line-height: 1.2;
 }
 
-.itemlist li:last-child {
-  border-bottom: none;
-}
-
-@media (max-width: 720px) {
-  .receipt-fields {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Print-friendly */
-@media print {
-  .topbar, .footer, .btn, .btn-secondary, .toggle, .card:not(.receipt) {
-    display: none !important;
-  }
-  body {
-    background: #fff;
-  }
-  .receipt-page .receipt {
-    box-shadow: none;
-    border: none;
-    margin: 0;
-  }
-}
