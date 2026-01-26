@@ -208,14 +208,15 @@ export default function App() {
         </div>
 
         <ClientSummary
-          clientName={clientName}
-          setClientName={setClientName}
-          eventDate={eventDate}
-          setEventDate={setEventDate}
-          lines={lines}
-          taxTotal={taxes.totalTax}
-          totalDue={totalDue}
-        />
+  clientName={clientName}
+  setClientName={setClientName}
+  eventDate={eventDate}
+  items={selectedItems}
+  totals={totals}
+  addTax={addTax}
+  taxAmount={taxAmount}
+  phone="803-600-5386"
+/>
       )}
 
       <footer className="footer subtle">
