@@ -238,3 +238,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libe
   line-height: 1.2;
 }
 
+
+
+/* Buttons row spacing */
+.row button { margin-top: 6px; }

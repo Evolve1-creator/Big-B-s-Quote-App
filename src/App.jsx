@@ -20,6 +20,7 @@ export default function App() {
   const [clientView, setClientView] = useState(false);
   const [clientName, setClientName] = useState("");
   const [eventDate, setEventDate] = useState("");
+  const [page, setPage] = useState("builder");
 
   // load saved state
   useEffect(() => {
@@ -44,6 +45,13 @@ export default function App() {
       localStorage.setItem(LS_KEY, JSON.stringify({ people, selected, addTax, county, city, clientView, clientName, eventDate }));
     } catch {}
   }, [people, selected, addTax, county, city, clientView, clientName, eventDate]);
+
+
+  useEffect(() => {
+    // Receipt page is always client-safe view
+    setClientView(page === "receipt");
+  }, [page]);
+
 
   const p = Number(people);
 
@@ -112,13 +120,24 @@ export default function App() {
       <div className="subtle">Enter headcount, check items, and generate a client-ready summary.</div>
     </div>
   </div>
-  <button className={clientView ? "toggle toggle-on" : "toggle"} onClick={() => setClientView(v => !v)} type="button">
-    Client View: {clientView ? "ON" : "OFF"}
-  </button>
+  <button className="toggle" onClick={() => setPage(page === "builder" ? "receipt" : "builder")} type="button">
+          {page === "builder" ? "Receipt" : "Back"}
+        </button>
 </header>
 
 
       <div className="card">
+        <div className="grid2">
+          <label>
+            Client name
+            <input value={clientName} onChange={e => setClientName(e.target.value)} placeholder="Client name" />
+          </label>
+          <label>
+            Event date
+            <input value={eventDate} onChange={e => setEventDate(e.target.value)} placeholder="MM/DD/YYYY" />
+          </label>
+        </div>
+
         <label>
           Number of people
           <input
@@ -135,6 +154,7 @@ export default function App() {
         <div className="row">
           <button className="btn-secondary" type="button" onClick={clearAll}>Clear selections</button>
           <button className="btn-secondary" type="button" onClick={resetQuote}>Reset quote</button>
+          <button type="button" onClick={() => setPage("receipt")} disabled={page==="receipt"}>Receipt</button>
         </div>
 
       </div>
@@ -151,7 +171,7 @@ export default function App() {
         taxTable={scTaxTable}
       />
 
-      {!clientView ? (
+      {page === "builder" ? (
         <div className="card">
           <h2>Internal Quote</h2>
           {lines.length === 0 ? (
