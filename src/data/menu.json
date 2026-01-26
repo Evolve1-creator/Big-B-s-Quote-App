@@ -4,49 +4,49 @@
     "name": "Pulled Pork",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 11.0
+    "pricePerLb": 13.0
   },
   {
     "id": "pulled_chicken",
     "name": "Pulled Chicken",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 12.0
+    "pricePerLb": 14.0
   },
   {
     "id": "smoked_beef_brisket",
     "name": "Smoked Beef Brisket",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 17.0
+    "pricePerLb": 19.0
   },
   {
     "id": "pork_belly",
     "name": "Pork Belly",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 15.0
+    "pricePerLb": 17.0
   },
   {
     "id": "baby_back_ribs",
     "name": "Baby Back Ribs",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 13.0
+    "pricePerLb": 15.0
   },
   {
     "id": "smoked_pork_loin",
     "name": "Smoked Pork Loin",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 12.0
+    "pricePerLb": 15.0
   },
   {
     "id": "smoked_sausage",
     "name": "Smoked Sausage",
     "category": "Meats",
     "pricingType": "per_lb",
-    "pricePerLb": 9.0
+    "pricePerLb": 11.0
   },
   {
     "id": "pulled_pork_sandwich",
@@ -84,7 +84,7 @@
     "name": "Southern Slaw",
     "category": "Sides",
     "pricingType": "half_pan",
-    "halfPanPrice": 25.0
+    "halfPanPrice": 30.0
   },
   {
     "id": "potato_salad",
@@ -147,28 +147,28 @@
     "name": "Hawaiian Rolls",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 0.5
+    "pricePerPerson": 1.0
   },
   {
     "id": "dinner_rolls",
     "name": "Dinner Rolls",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 0.5
+    "pricePerPerson": 1.0
   },
   {
     "id": "slider_buns",
     "name": "Slider Buns",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 0.5
+    "pricePerPerson": 1.0
   },
   {
     "id": "hamburger_buns",
     "name": "Hamburger Buns",
     "category": "Breads",
     "pricingType": "per_person",
-    "pricePerPerson": 0.5
+    "pricePerPerson": 1.0
   },
   {
     "id": "banana_pudding",
@@ -217,7 +217,7 @@
     "name": "Onsite Service",
     "category": "Drinks & Extras",
     "pricingType": "per_person",
-    "pricePerPerson": 5.0
+    "pricePerPerson": 6.0
   },
   {
     "id": "delivery",
@@ -225,5 +225,13 @@
     "category": "Drinks & Extras",
     "pricingType": "flat",
     "flatPrice": 25.0
+  },
+  {
+    "id": "salad_bar",
+    "name": "Salad Bar (On-site only)",
+    "category": "Drinks & Extras",
+    "pricingType": "per_person",
+    "pricePerPerson": 5.0,
+    "requiresOnsite": true
   }
 ]
